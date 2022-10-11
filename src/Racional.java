@@ -101,12 +101,16 @@ public class Racional {
         int numeradorSum = 0;
         int numeradorTempSum;
         int denominadorSum = 0;
+
         if(numSum.getDenominador() == getDenominador()){
+
             numeradorSum = numSum.getNumerador() + getNumerador();
             denominadorSum = getDenominador();
             Racional numRes = new Racional(numeradorSum, denominadorSum);
             return numRes;
+
         }else if(numSum.getDenominador() != getDenominador()){
+
             denominadorSum = numSum.getDenominador() * getDenominador();
             numeradorTempSum = getNumerador() * numSum.getDenominador();
             numeradorSum = getDenominador() * numSum.getNumerador();
@@ -123,15 +127,25 @@ public class Racional {
         int numeradorTempRes;
         int denominadorRes = 0;
         if(numRest.getDenominador() == getDenominador()){
+
             numeradorRes = numRest.getNumerador() - getNumerador();
             denominadorRes = getDenominador();
             Racional numRes = new Racional(numeradorRes, denominadorRes);
             return numRes;
+
         }else if(numRest.getDenominador() != getDenominador()){
-            numeradorRes = numRest.getDenominador() * getDenominador();
-            numeradorTempRes = getNumerador() * numRest.getDenominador();
-            numeradorRes = getDenominador() * numRest.getNumerador();
+
+            
+            int mcd = mcd(getDenominador(), numRest.getDenominador());
+            
+            numeradorRes = getNumerador() * numRest.getDenominador(); 
+            numeradorTempRes = getDenominador() * numRest.getNumerador();
             numeradorRes = numeradorRes - numeradorTempRes;
+            denominadorRes = mcd;
+            // numeradorRes = numRest.getDenominador() * getDenominador();
+            // numeradorTempRes = getNumerador() * numRest.getDenominador();
+            // numeradorRes = getDenominador() * numRest.getNumerador();
+            // numeradorRes = numeradorRes - numeradorTempRes;
             Racional numRes = new Racional(numeradorRes, numeradorRes);
             return numRes;
         }
